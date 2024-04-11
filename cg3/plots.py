@@ -148,3 +148,4 @@ def collect_data():
     plt.title("Зависимость количества ступенек линии от угла")
     plt.legend()
     plt.savefig(PLOT_PATH)
+    plt.clf()
