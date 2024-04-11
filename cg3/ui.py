@@ -431,7 +431,7 @@ class Ui_Dialog(object):
         self.label_20.setText(_translate("Dialog", "y2 ="))
         self.drawButton.setText(_translate("Dialog", "Нарисовать"))
         self.label_19.setText(_translate("Dialog", "Шаг ="))
-        self.label_21.setText(_translate("Dialog", "Спектр углов"))
+        self.label_21.setText(_translate("Dialog", "Спектр углов (град.)"))
         self.label_24.setText(_translate("Dialog", "r ="))
         self.drawSunButton.setText(_translate("Dialog", "Нарисовать"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.main_tab), _translate("Dialog", "Main Tab"))

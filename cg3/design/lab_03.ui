@@ -939,7 +939,7 @@ background-color: rgb(61, 61, 61);</string>
        </font>
       </property>
       <property name="text">
-       <string>Спектр углов</string>
+       <string>Спектр углов (град.)</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
