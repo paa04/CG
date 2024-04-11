@@ -219,7 +219,7 @@
       <property name="checked">
        <bool>false</bool>
       </property>
-      <widget class="QToolButton" name="libAlgoButton">
+      <widget class="QToolButton" name="ddaAlgoButton">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -237,7 +237,7 @@
         <string notr="true">background-color: rgb(255, 255, 127);</string>
        </property>
        <property name="text">
-        <string>Библ. Функция</string>
+        <string>ЦДА</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -249,7 +249,7 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QToolButton" name="ddaAlgoButton">
+      <widget class="QToolButton" name="libAlgoButton">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -267,7 +267,7 @@
         <string notr="true">background-color: rgb(170, 255, 127);</string>
        </property>
        <property name="text">
-        <string>ЦДА</string>
+        <string>Библ. Функция</string>
        </property>
        <property name="checkable">
         <bool>true</bool>

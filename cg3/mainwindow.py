@@ -11,7 +11,7 @@ class MainWindow(QMainWindow, Ui_Dialog, QWidget):
     def __init__(self):
         super().__init__()
         self.color = [255, 0, 0]
-        self.curAlgo = 'lib'
+        self.curAlgo = 'dda'
         self.setupUi(self)
         self.connectButtons()
 
