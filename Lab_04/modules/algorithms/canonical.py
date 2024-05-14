@@ -35,7 +35,7 @@ def canonical_ellipse(x_center, y_center, radius_x, radius_y, alpha):
         append_points_ellipse(points, x + x_center, y + y_center, x_center, y_center, alpha)
 
     m = 1 / m
-    for y in range(border2 + 1):
+    for y in range(border2, -1, -1):
         x = round(sqrt(sqr_radius_y - pow(y, 2)) * m)
 
         append_points_ellipse(points, x + x_center, y + y_center, x_center, y_center, alpha)
