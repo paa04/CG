@@ -1,6 +1,6 @@
 from PyQt6.QtCore import Qt, QPoint
 from PyQt6.QtWidgets import QGraphicsView
-from PyQt6.QtGui import QColor
+from PyQt6.QtGui import QColor, QPixmap, QPainter
 from .basic_func import bresenhamInt
 
 
@@ -21,8 +21,11 @@ class GraphicsView(QGraphicsView):
         self.point = event.pos()
         match event.button():
             case Qt.MouseButton.MiddleButton:
+                if self.prefillbuf:
+                    self.scene().addLine(self.prefillbuf[0], self.prefillbuf[1], self.prefillbuf[0], self.prefillbuf[1], self.prefillbuf[2])
                 self.prefilledPoints.clear()
                 self.prefilledPoints.append([self.point.x(), self.point.y()])
+                self.prefillbuf = [self.point.x(), self.point.y(), self.getPixelColor(self.point.x(), self.point.y())]
                 self.drawPrefilled()
             case Qt.MouseButton.LeftButton:
                 if self.isNew:
@@ -50,6 +53,16 @@ class GraphicsView(QGraphicsView):
         # noinspection PyTypeChecker
         self.scene().addLine(*self.prefilledPoints[-1], *self.prefilledPoints[-1], QColor(*(self.fillColor)))
         self.show()
+
+    def getPixelColor(self, x, y):
+        rect = self.scene().sceneRect()
+        pixmap = QPixmap(int(rect.width()), int(rect.height()))
+        painter = QPainter(pixmap)
+        self.scene().render(painter)
+        painter.end()
+        image = pixmap.toImage()
+        color = image.pixelColor(x, y)
+        return color
 
     def draw(self):
         # noinspection PyTypeChecker

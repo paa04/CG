@@ -42,6 +42,7 @@ class MainWindow(QMainWindow, Ui_Dialog, QWidget):
         self.graphicsView.isNew = True
 
     def drawClicked(self):
+        self.graphicsView.prefillbuf = None
         self.isDelay = self.delayButton.isChecked()
         delay_time = self.delaySlider.maximum() - self.delaySlider.value() + 1 if self.isDelay else 0
         fill_polygon(self.graphicsView, self.fillColor, self.bordColor, self.isDelay, delay_time)
