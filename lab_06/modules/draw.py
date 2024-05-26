@@ -18,48 +18,51 @@ def fill_polygon(view: GraphicsView, color: list[3], border_color: list[3],
     cur_d = delayTime
 
     while stack:
-        point = stack.pop()
-        painter.drawPoint(point[0], point[1])
+        pixel = stack.pop()
+        painter.drawPoint(pixel[0], pixel[1])
 
-        x, y = point[0] + 1, point[1]
-        pixel = pixels.pixelColor(x, y).getRgb()
-        while pixel not in colors:
+
+        x, y = pixel[0] + 1, pixel[1]
+
+        while pixels.pixelColor(x, y).getRgb() != (*border_color, 255):
             painter.drawPoint(x, y)
             x += 1
-            pixel = pixels.pixelColor(x, y).getRgb()
-        rborder = x - 1
+        r_border = x - 1
 
-        x = point[0] - 1
-        pixel = pixels.pixelColor(x, y).getRgb()
-        while pixel not in colors:
+        x = pixel[0] - 1
+
+        while pixels.pixelColor(x, y).getRgb() != (*border_color, 255):
             painter.drawPoint(x, y)
             x -= 1
-            pixel = pixels.pixelColor(x, y).getRgb()
-        lborder = x + 1
 
-        sign = [1, -1]
+        l_border = x + 1
 
-        for i in sign:
-            x = lborder
-            y = point[1] + i
+        for i in [1, -1]:
+            x = l_border
+            y = pixel[1] + i
 
-            while x <= rborder:
-                is_exist = False
-                pixel = pixels.pixelColor(x, y).getRgb()
-                while pixel not in colors and x <= rborder:
-                    is_exist = True
+            while x <= r_border:
+                flag = False
+                # print(pixels.pixelColor(x, y), pixels.pixelColor(x))
+                while pixels.pixelColor(x, y).getRgb() not in colors and x < r_border:
+                    if not flag:
+                        flag = True
                     x += 1
-                    pixel = pixels.pixelColor(x, y).getRgb()
-                if is_exist:
-                    stack.extend([[x - 1, y]])
-                    is_exist = False
-                xi = x
-                pixel = pixels.pixelColor(x, y).getRgb()
-                while pixel in colors and x <= rborder:
+
+                if flag:
+                    if x == r_border and pixels.pixelColor(x, y).getRgb() not in colors:
+                        stack.extend([[x, y]])
+                    else:
+                        stack.extend([[x - 1, y]])
+                    flag = False
+
+                x_enter = x
+                while pixels.pixelColor(x, y).getRgb() in colors and x < r_border:
                     x += 1
-                    pixel = pixels.pixelColor(x, y).getRgb()
-                if x == xi:
+
+                if x_enter == x:
                     x += 1
+
         cur_d -= 1
         if isDelay and cur_d == 0:
             cur_d = delayTime

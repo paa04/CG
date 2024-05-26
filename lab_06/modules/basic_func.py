@@ -7,9 +7,9 @@ def bresenhamInt(x1: float, y1: float, x2: float, y2: float):
     x_sign = 1 if dx > 0 else -1
     y_sign = 1 if dy > 0 else -1
     dx, dy = abs(dx), abs(dy)
-    
+
     x, y = round(x1), round(y1)
-    
+
     turned = False
     if dx < dy:
         turned = True
