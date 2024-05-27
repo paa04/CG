@@ -14,19 +14,25 @@ class GraphicsView(QGraphicsView):
         self.point = None
         self.isNew = True
         self.prefilledPoints = []
-        self.prefillbuf = None
+        self.prefillBuf = None
         self.start_point = []
 
     def mousePressEvent(self, event):
         self.point = event.pos()
         match event.button():
             case Qt.MouseButton.MiddleButton:
-                if self.prefillbuf:
-                    self.scene().addLine(self.prefillbuf[0], self.prefillbuf[1], self.prefillbuf[0], self.prefillbuf[1], self.prefillbuf[2])
-                self.prefilledPoints.clear()
-                self.prefilledPoints.append([self.point.x(), self.point.y()])
-                self.prefillbuf = [self.point.x(), self.point.y(), self.getPixelColor(self.point.x(), self.point.y())]
-                self.drawPrefilled()
+                print(list(self.getPixelColor(self.point.x(), self.point.y()).getRgb())[:3], self.bordColor)
+                if list(self.getPixelColor(self.point.x(), self.point.y()).getRgb())[:3] != self.bordColor:
+                    if self.prefillBuf:
+                        self.scene().addLine(self.prefillBuf[0], self.prefillBuf[1], self.prefillBuf[0],
+                                             self.prefillBuf[1], self.prefillBuf[2])
+                    self.prefilledPoints.clear()
+                    self.prefilledPoints.append([self.point.x(), self.point.y()])
+                    self.prefillBuf = [self.point.x(), self.point.y(),
+                                       self.getPixelColor(self.point.x(), self.point.y())]
+                    self.drawPrefilled()
+                else:
+                    self.prefilledPoints.clear()
             case Qt.MouseButton.LeftButton:
                 if self.isNew:
                     self.points.append([])
